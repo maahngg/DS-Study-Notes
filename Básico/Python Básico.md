@@ -41,7 +41,7 @@ quantidade_habitantes = 8000000000  # Python lida com inteiros arbitrariamente g
 
 Os tipos `float` representam o conjunto dos números reais (com ponto flutuante):
 
-$$\mathbb{R} = \left\{ ...,-1.0 ,...,-0.75,..., -\frac{1}{2}, ...,0,...,0.5,..., \frac{1}{4},...,1.0,...\right\}$$
+$$\mathbb{R} = \{ ...,-1.0 ,...,-0.75,..., -\frac{1}{2}, ...,0,...,0.5,..., \frac{1}{4},...,1.0,...\}$$
 
 As variáveis do tipo `float` são assim:
 
