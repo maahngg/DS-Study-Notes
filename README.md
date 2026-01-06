@@ -10,7 +10,6 @@
 
   <p>
     <a href="#-tópicos">Tópicos</a> •
-    <a href="#-tecnologias">Tecnologias</a> •
     <a href="#-autores">Autores</a>
   </p>
 
@@ -21,9 +20,34 @@
 
 <br>
 
+<h2 id="-tópicos">📂 Tópicos</h2>
+
+<p>
+  O conteúdo está organizado em uma trilha de aprendizado progressiva.
+</p>
+
+### 🟢 Nível 01: Básico
+> *Conceitos fundamentais para iniciar a jornada.*
+- [x] [Python Básico](./Básico/Python%20Básico.md)
+- [x] [Python Básico - Cheat Sheet](./Básico/Python%20Básico%20-%20Cheat%20Sheet.md)
+
+### 🟡 Nível 02: Iniciante
+> *Manipulação de dados, SQL, primeiro contato com ML.*
+- [ ] *Em breve...*
+
+### 🟠 Nível 03: Intermediário
+> *Modelagem preditiva, Big Data, IA Generativa.*
+- [ ] *Em breve...*
+
+### 🔴 Nível 04: Avançado
+> *Deep Learning, MLOps, Visão Computacional e Estratégica.*
+- [ ] *Em breve...*
+
+<br>
+
 ---
 
-## 👥 Autores
+<h2 id="-autores"> 👥 Autores </h2>
 
 <table align="center">
   <tr>
