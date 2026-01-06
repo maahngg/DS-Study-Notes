@@ -4,7 +4,8 @@
   <h1>📚 Notes - Data Science</h1>
 
   <p>
-    <strong>Repositório de anotações em grupo sobre Ciência de Dados</strong>
+    <strong>Repositório de anotações em grupo sobre Ciência de Dados</strong> <br>
+    <i>Recomendamos que, para melhor leitura, execute os arquivos markdown em Obsidian ou Notion</i>
   </p>
 
   <p>
