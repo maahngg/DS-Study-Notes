@@ -1,6 +1,9 @@
+# 🐍 Python Básico
 
 Para uma explicação e procura rápida, acesse:
+
 [Python Básico - Cheat Sheet](https://github.com/maahngg/DS-Study-Notes/blob/main/B%C3%A1sico/Python%20B%C3%A1sico%20-%20Cheat%20Sheet.md) - (GitHub: link externo)
+
 [[Python Básico - Cheat Sheet]] - (Obsidian: link interno) 
 
 # Variáveis
