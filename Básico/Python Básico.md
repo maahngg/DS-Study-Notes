@@ -32,7 +32,7 @@ saudacao = 'Opa! Tudo bem?'
 
 Os tipos `int` representam o conjunto dos números inteiros (positivos, negativos e zero), sem parte decimal:
 
-$$\mathbb{Z} = \{...,-3,-2,-1,0,1,2,3,...\}$$
+$$\mathbb{Z} = \\{...,-3,-2,-1,0,1,2,3,...\\}$$
 
 As variáveis do tipo `int` são assim:
 
@@ -46,7 +46,7 @@ quantidade_habitantes = 8000000000  # Python lida com inteiros arbitrariamente g
 
 Os tipos `float` representam o conjunto dos números reais (com ponto flutuante):
 
-$$\mathbb{R} = \{ ...,-1.0 ,...,-0.75,..., -\frac{1}{2}, ...,0,...,0.5,..., \frac{1}{4},...,1.0,...\}$$
+$$\mathbb{R} = \\{ ...,-1.0 ,...,-0.75,..., -\frac{1}{2}, ...,0,...,0.5,..., \frac{1}{4},...,1.0,...\\}$$
 
 As variáveis do tipo `float` são assim:
 
@@ -59,7 +59,7 @@ peso_kg = 69.5
 
 O tipo `bool` representa a Álgebra Booleana, contendo apenas dois valores lógicos possíveis, frequentemente associados a verdadeiro (1) e falso (0):
 
-$$\mathbb{B} = \{True, False\} \equiv \{1, 0\}$$
+$$\mathbb{B} = \\{True, False\\} \equiv \\{1, 0\\}$$
 
 As variáveis do tipo `bool` são assim (note as iniciais maiúsculas, obrigatórias em Python):
 
@@ -72,7 +72,7 @@ pagamento_aprovado = False
 
 O tipo `complex` representa o conjunto dos números complexos. Em Python, a unidade imaginária ($i$) é representada pela letra `j`:
 
-$$\mathbb{C} = \{ a + bi \mid a, b \in \mathbb{R} \text{ e } i = \sqrt{-1} \}$$
+$$\mathbb{C} = \\{ a + bi \mid a, b \in \mathbb{R} \text{ e } i = \sqrt{-1} \\}$$
 
 As variáveis do tipo `complex` são assim:
 
@@ -85,7 +85,7 @@ corrente_eletrica = 5j
 
 O tipo `str` (String) representa uma sequência finita de caracteres pertencentes a um alfabeto $\Sigma$ (no caso do Python 3, o padrão Unicode). Se $S$ é o conjunto de todas as strings possíveis:
 
-$$S = \{ (c_1, c_2, ..., c_n) \mid n \in \mathbb{N}_0, c_i \in \Sigma \}$$
+$$S = \\{ (c_1, c_2, ..., c_n) \mid n \in \mathbb{N}_0, c_i \in \Sigma \\}$$
 
 As variáveis do tipo `str` são delimitadas por aspas:
 
@@ -268,7 +268,7 @@ print(f"Sua nota é {nota}")
 
 O laço `for` em Python é usado para iteração **determinada**. Ele percorre itens de qualquer objeto iterável (como listas, strings, tuplas ou dicionários) na ordem em que aparecem.
 
-Matematicamente, dado um conjunto sequencial $S = \{x_1, x_2, ..., x_n\}$:
+Matematicamente, dado um conjunto sequencial $S = \\{x_1, x_2, ..., x_n\\}$:
 
 $$\forall x_i \in S, \text{ execute } f(x_i)$$
 #### Iterando sobre coleções
@@ -293,7 +293,7 @@ Para gerar sequências numéricas, utiliza-se a função `range(start, stop, ste
 - **step**: Passo (incremento). Padrão é 1.
 
 
-$$R = \{ k \in \mathbb{Z} \mid start \le k < stop \}$$
+$$R = \\{ k \in \mathbb{Z} \mid start \le k < stop \\}$$
 
 ```python
 # Gera: 0, 1, 2, 3, 4
@@ -414,7 +414,7 @@ uma_constante = 10, 20 # Parênteses são opcionais em alguns contextos
 
 O conjunto (`set`) é uma coleção não ordenada de elementos únicos. Ele segue estritamente a definição matemática de conjuntos, não permitindo duplicatas. Se $S$ é um set:
 
-$$S = \{ x \mid x \in \mathbb{U} \} \quad \text{onde } \forall a, b \in S, a \neq b$$
+$$S = \\{ x \mid x \in \mathbb{U} \\} \quad \text{onde } \forall a, b \in S, a \neq b$$
 
 As variáveis do tipo `set` são definidas por chaves (exceto para conjuntos vazios, onde se usa `set()`):
 
@@ -427,7 +427,7 @@ numeros_sem_repeticao = {1, 2, 2, 3, 3, 3} # O Python reduzirá para {1, 2, 3}
 
 O dicionário (`dict`) representa um mapeamento (ou função finita) entre um conjunto de chaves ($K$) e um conjunto de valores ($V$). Cada chave deve ser única e imutável (hashable).
 
-$$D = \{ (k, v) \mid k \in K, v \in V \} \quad \text{onde } f(k) = v$$
+$$D = \\{ (k, v) \mid k \in K, v \in V \\} \quad \text{onde } f(k) = v$$
 
 As variáveis do tipo `dict` são definidas por pares chave-valor dentro de chaves:
 
@@ -735,7 +735,7 @@ A _List Comprehension_ é uma construção sintática que permite criar listas a
 
 Seja $S$ o conjunto que desejamos criar, formado aplicando uma função $f(x)$ a elementos de um domínio $D$, tal que uma condição $P(x)$ seja verdadeira:
 
-$$S = \{ f(x) \mid x \in D \land P(x) \}$$
+$$S = \\{ f(x) \mid x \in D \land P(x) \\}$$
 
 Em Python, a sintaxe reflete quase exatamente essa definição: `[ f(x) for x in D if P(x) ]`
 
@@ -766,7 +766,7 @@ Seguindo a mesma lógica matemática, podemos construir dicionários (mapeamento
 
 Seja $M$ um mapeamento de chaves $k$ para valores $v$:
 
-$$M = \{ k: v \mid k \in K, v = f(k) \}$$
+$$M = \\{ k: v \mid k \in K, v = f(k) \\}$$
 
 Sintaxe: `{ chave: valor for item in iteravel if condicao }`
 
