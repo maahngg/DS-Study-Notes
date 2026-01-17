@@ -59,9 +59,12 @@ Ex.: $A = \\{ 1,3,5,8,10 \\}$ e $B = \\{ 2,5,6,8,9 \\}$
 #### Complementar
 
 O complementar de um conjunto A é um conjunto de elementos que não estão em A. Pode ser entendido como a diferença entre o conjunto Universo e o conjunto A
+
 $$
 A^{c} = U \backslash A
-$$Ex.: $A = \\{ 1,3,5,8,10 \\}$,  $B = \\{ 2,5,6,8,9 \\}$ e $U = \\{ 1,2,3,4,5,6,7,8,9,10 \\}$
+$$
+
+Ex.: $A = \\{ 1,3,5,8,10 \\}$,  $B = \\{ 2,5,6,8,9 \\}$ e $U = \\{ 1,2,3,4,5,6,7,8,9,10 \\}$
 	$A^{c} = \\{ 2,4,6,7,9 \\}$
 	$B^{c} = \\{ 1,3,4,7,10 \\}$
 
@@ -86,22 +89,22 @@ Cada uma dessas afirmações é uma proposição lógica, que pode ser verdadeir
 	A disjunção é avaliada a partir de duas proposições lógicas. A disjunção é verdadeira se pelo menos uma das proposições for verdadeira.
 
 
-|  p  |  q  | p$\lor$q |
-| :-: | :-: | :------: |
-|  V  |  V  |    V     |
-|  V  |  F  |    V     |
-|  F  |  V  |    V     |
-|  F  |  F  |    F     |
+|  p  |  q  | p $\lor$ q |
+| :-: | :-: | :--------: |
+|  V  |  V  |     V      |
+|  V  |  F  |     V      |
+|  F  |  V  |     V      |
+|  F  |  F  |     F      |
 
 **Conjunção ( $\land$ | e):**
 	A conjunção é avaliada a partir de duas proposições lógicas. A conjunção é verdadeira quanto todas as proposições forem verdadeiras
 
-|  p  |  q  | p$\land$q |
-| :-: | :-: | :-------: |
-|  V  |  V  |     V     |
-|  V  |  F  |     F     |
-|  F  |  V  |     F     |
-|  F  |  F  |     F     |
+|  p  |  q  | p $\land$ q |
+| :-: | :-: | :---------: |
+|  V  |  V  |      V      |
+|  V  |  F  |      F      |
+|  F  |  V  |      F      |
+|  F  |  F  |      F      |
 
 **Negação ($\neg$ | ~):**
 	A negação inverte o valor lógico da proposição lógica. Se for verdadeiro, se torna falso. Se for falso, se torna verdadeiro.
@@ -114,12 +117,12 @@ Cada uma dessas afirmações é uma proposição lógica, que pode ser verdadeir
 **Condicional (se ... então):**
 	A implicação representa uma regra condicional. Se uma proposição é verdadeira, então a outra também deve ser.
 
-|  p  |  q  | p$\to$q |
-| :-: | :-: | :-----: |
-|  V  |  V  |    V    |
-|  V  |  F  |    F    |
-|  F  |  V  |    V    |
-|  F  |  F  |    V    |
+|  p  |  q  | p $\to$ q |
+| :-: | :-: | :-------: |
+|  V  |  V  |     V     |
+|  V  |  F  |     F     |
+|  F  |  V  |     V     |
+|  F  |  F  |     V     |
 
 Ex.:
 	p: O tempo está quente.
