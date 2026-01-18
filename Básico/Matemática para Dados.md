@@ -65,9 +65,10 @@ A^{c} = U \backslash A
 $$
 
 Ex.: $A = \\{ 1,3,5,8,10 \\}$,  $B = \\{ 2,5,6,8,9 \\}$ e $U = \\{ 1,2,3,4,5,6,7,8,9,10 \\}$
-	$A^{c} = \\{ 2,4,6,7,9 \\}$
-	$B^{c} = \\{ 1,3,4,7,10 \\}$
 
+$A^{c} = \\{ 2,4,6,7,9 \\}$
+
+$B^{c} = \\{ 1,3,4,7,10 \\}$
 
 ---
 ## Lógica proposicional
@@ -176,7 +177,8 @@ $$P = (x, y)$$
 <div align="center">
 <img src="https://www.pngkey.com/png/full/555-5555630_open-exemplo-de-plano-cartesiano.png" width="300px"  />
 </div>
-***Obs.:** Repare que a convenção padrão é $P = (x,y)$. Caso usemos $P = (y,x)$ teremos pontos diferentes dos representados, exceto em casos que $x = y$. Por isso, há importância em fazer uso da convenção.*
+
+***Obs.:*** Repare que a convenção padrão é $P = (x, y)$ . Caso usemos $P = (y, x)$ teremos pontos diferentes dos representados, exceto em casos que $x = y$ . Por isso, há importância em fazer uso da convenção.
 
 Ex.: Para representar um dado de um cliente onde o eixo $x$ é a idade e o eixo $y$ é a renda mensal (em milhares):
 
@@ -254,4 +256,8 @@ $$\vec{v} = [v_1, v_2, ..., v_n]$$
 
 - Vetor Coluna:
 
-$$\vec{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$
+$$\vec{v} = \begin{bmatrix} v_1 \\ 
+v_2 \\ 
+\vdots \\ 
+v_n \end{bmatrix}$$
+
