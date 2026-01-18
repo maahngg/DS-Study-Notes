@@ -152,3 +152,106 @@ Para o condicional $p\to q$ ser falso, a única possibilidade é o tempo estar q
 |  F  |  V  |  F  |     V      |  V  |            V            |
 |  F  |  F  |  V  |     F      |  F  |            F            |
 |  F  |  F  |  F  |     F      |  V  |            F            |
+
+---
+## Álgebra Linear
+
+### Sistema de Coordenadas
+
+Um sistema de coordenadas permite a identificação de pontos no espaço através de um conjunto de números.
+
+O sistema mais comum é o **Sistema Cartesiano**, formado por eixos perpendiculares que se cruzam na origem.
+
+Plano Cartesiano ($\mathbb{R}^2$):
+
+Formado por dois eixos reais.
+
+- **Eixo das Abscissas ($x$):** Eixo horizontal.
+- **Eixo das Ordenadas ($y$):** Eixo vertical.
+
+Um ponto $P$ é representado por um par ordenado (Caso do $\mathbb{R}^{2}$):
+
+$$P = (x, y)$$
+
+<div align="center">
+<img src="https://www.pngkey.com/png/full/555-5555630_open-exemplo-de-plano-cartesiano.png" width="300px"  />
+</div>
+***Obs.:** Repare que a convenção padrão é $P = (x,y)$. Caso usemos $P = (y,x)$ teremos pontos diferentes dos representados, exceto em casos que $x = y$. Por isso, há importância em fazer uso da convenção.*
+
+Ex.: Para representar um dado de um cliente onde o eixo $x$ é a idade e o eixo $y$ é a renda mensal (em milhares):
+
+$P = (30, 5)$ $\to$ Cliente com 30 anos e renda de 5 mil.
+
+Espaço n-Dimensional ($\mathbb{R}^n$):
+
+Em Ciência de Dados, raramente trabalhamos apenas com duas dimensões. Cada "feature" (coluna/atributo) de uma base de dados representa uma dimensão.
+
+Um ponto em $\mathbb{R}^n$ é representado por uma n-upla (sequência de $n$ elementos).
+
+$$P = (x_1, x_2, x_3, ..., x_n)$$
+
+Ex.: Um registro contendo \[Idade, Renda, Pontuação de Crédito, Número de Filhos\] seria um ponto em um espaço de 4 dimensões ($\mathbb{R}^4$).
+
+$A = (35, 8000, 750, 2)$
+
+#### **Vetor**
+
+Matematicamente, um vetor é um objeto geométrico que possui **magnitude** (tamanho/comprimento), **direção** e **sentido**. Pode ser visualizado como uma seta que parte da origem do sistema de coordenadas até um ponto $P$.
+
+Algebricamente (e na Ciência de Dados), abstraímos a geometria e definimos um vetor simplesmente como uma **lista ordenada de números**.
+
+Geralmente é denotado por uma letra minúscula em negrito ($\mathbf{v}$) ou com uma seta ($\vec{v}$).
+
+Um vetor no $\mathbb{R}^n$ é definido como:
+
+$$\vec{v} = [v_1, v_2, ..., v_n]$$
+
+Onde cada $v_i$ é um componente (ou coordenada) do vetor.
+
+##### Propriedades Geométricas:
+
+Geometricamente, um vetor é caracterizado por três componentes fundamentais que definem sua existência no espaço.
+
+**1. Magnitude (Módulo ou Norma)**
+
+Refere-se ao "tamanho" ou "comprimento" do vetor. Matematicamente, é a distância escalar entre a origem e a extremidade do vetor.
+
+Em Ciência de Dados, a magnitude é frequentemente associada à intensidade ou "força" da observação.
+
+- Notação comum: $||\vec{v}||$ ou $|\vec{v}|$
+
+**2. Direção**
+
+Refere-se à reta suporte sobre a qual o vetor está assentado. A direção indica a inclinação do vetor em relação aos eixos do sistema de coordenadas.
+
+Dizemos que dois vetores têm a mesma direção se forem paralelos (estiverem na mesma reta suporte ou em retas paralelas).
+
+Ex.: Horizontal, vertical, inclinado a 30º.
+
+**3. Sentido**
+
+Refere-se à orientação do vetor ao longo de sua direção. Para cada direção determinada, existem apenas dois sentidos possíveis. É indicado visualmente pela ponta da seta.
+
+Ex.: Da esquerda para a direita, de cima para baixo, positivo, negativo.
+
+Analogia Prática:
+
+Imagine um carro viajando em uma rodovia entre São Paulo e Rio de Janeiro.
+
+- **Direção:** A rodovia em si (a linha que conecta as cidades).
+- **Sentido:** Indo para o Rio de Janeiro (ou voltando para São Paulo).
+- **Magnitude:** A velocidade do carro (ex.: 100 km/h).
+
+_**Obs.:** É importante notar que vetores só são considerados **iguais** se compartilharem exatamente a mesma magnitude, a mesma direção e o mesmo sentido._
+
+**Vetor Linha vs. Vetor Coluna**
+
+Em álgebra linear computacional, a orientação é importante:
+
+- Vetor Linha: 
+
+$$\vec{v} = [v_1, v_2, ..., v_n]$$
+
+- Vetor Coluna:
+
+$$\vec{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$
