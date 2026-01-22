@@ -493,13 +493,14 @@ Geralmente denotamos matrizes por letras maiúsculas (ex.: $A, B, W$).
 
 Uma matriz $A$ com **$m$** linhas e **$n$** colunas é chamada de matriz de ordem $m \times n$ (lê-se "m por n").
 
-$$A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{m1} & a_{m2} & \cdots & a_{mn} \end{bmatrix}$$
+$$A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n} \cr a_{21} & a_{22} & \cdots & a_{2n} \cr \vdots & \vdots & \ddots & \vdots \cr a_{m1} & a_{m2} & \cdots & a_{mn} \end{bmatrix}$$
 
 Cada elemento é identificado por seus índices $a_{ij}$, onde $i$ é a linha e $j$ a coluna.
 
 Ex.: Uma matriz $2 \times 3$ (2 linhas, 3 colunas):
 
-$$B = \begin{bmatrix} 1 & 5 & 9 \\ 2 & 6 & 0 \end{bmatrix}$$
+$$B = \begin{bmatrix} 1 & 5 & 9 \\
+2 & 6 & 0 \end{bmatrix}$$
 
 Neste caso, o elemento $b_{21} = 2$ (2ª linha, 1ª coluna).
 
@@ -515,7 +516,7 @@ Possui o mesmo número de linhas e colunas ($m = n$).
 
 É a "unidade" das matrizes (equivalente ao número 1 na multiplicação escalar). É uma matriz quadrada preenchida com 0s, exceto na diagonal principal, que é preenchida com 1s.
 
-$$I_3 = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$$
+$$I_3 = \begin{bmatrix} 1 & 0 & 0 \cr 0 & 1 & 0 \cr 0 & 0 & 1 \end{bmatrix}$$
 
 Propriedade: $A \cdot I = A$
 
@@ -523,7 +524,7 @@ Propriedade: $A \cdot I = A$
 
 A transposição é uma operação que transforma as linhas de uma matriz em colunas (e vice-versa). O que era $m \times n$ vira $n \times m$.
 
-Se $A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$, então $A^T = \begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix}$.
+Se  $A = \left[\matrix{1&2\cr 3&4}\right]$ , então  $A^T = \left[\matrix{1&3\cr 2&4}\right]$ .
 
 - **Uso em Dados:** Frequentemente precisamos transpor matrizes para alinhar dimensões antes de realizar multiplicações (ex.: rotacionar um dataset para cálculos específicos).
 
@@ -535,13 +536,13 @@ Assim como nos vetores, é feita elemento a elemento.
 
 Condição: As matrizes devem ter exatamente as mesmas dimensões.
 
-$$\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} + \begin{bmatrix} 10 & 1 \\ 0 & 2 \end{bmatrix} = \begin{bmatrix} 11 & 3 \\ 3 & 6 \end{bmatrix}$$
+$$\begin{bmatrix} 1 & 2 \cr 3 & 4 \end{bmatrix} + \begin{bmatrix} 10 & 1 \cr 0 & 2 \end{bmatrix} = \begin{bmatrix} 11 & 3 \cr 3 & 6 \end{bmatrix}$$
 
 #### Multiplicação por Escalar
 
 Multiplica-se cada elemento da matriz pelo número real $k$.
 
-$$2 \cdot \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} = \begin{bmatrix} 2 & 4 \\ 6 & 8 \end{bmatrix}$$
+$$2 \cdot \begin{bmatrix} 1 & 2 \cr 3 & 4 \end{bmatrix} = \begin{bmatrix} 2 & 4 \cr 6 & 8 \end{bmatrix}$$
 
 #### Multiplicação de Matrizes (Produto Matricial)
 
@@ -563,7 +564,7 @@ O elemento $c_{ij}$ da matriz resultante é o produto escalar da Linha $i$ de A 
 
 Ex.: $A$ ($2 \times 2$) e $B$ ($2 \times 3$)
 
-$$A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} , \ \ B = \begin{bmatrix} 5 & 6 & 0 \\ 7 & 8 & 1 \end{bmatrix}$$
+$$A = \begin{bmatrix} 1 & 2 \cr 3 & 4 \end{bmatrix} , \ \ B = \begin{bmatrix} 5 & 6 & 0 \cr 7 & 8 & 1 \end{bmatrix}$$
 
 Verificação: $(2 \times \mathbf{2})$ e $(\mathbf{2} \times 3)$ $\to$ Compatível. Resultado será $2 \times 3$.
 
@@ -573,6 +574,6 @@ $c_{11} = (1 \cdot 5) + (2 \cdot 7) = 5 + 14 = 19$
 
 Matriz final:
 
-$$A \cdot B = \begin{bmatrix} (1\cdot5 + 2\cdot7) & (1\cdot6 + 2\cdot8) & (1\cdot0 + 2\cdot1) \\ (3\cdot5 + 4\cdot7) & (3\cdot6 + 4\cdot8) & (3\cdot0 + 4\cdot1) \end{bmatrix} = \begin{bmatrix} 19 & 22 & 2 \\ 43 & 50 & 4 \end{bmatrix}$$
+$$A \cdot B = \begin{bmatrix} (1\cdot5 + 2\cdot7) & (1\cdot6 + 2\cdot8) & (1\cdot0 + 2\cdot1) \cr (3\cdot5 + 4\cdot7) & (3\cdot6 + 4\cdot8) & (3\cdot0 + 4\cdot1) \end{bmatrix} = \begin{bmatrix} 19 & 22 & 2 \cr 43 & 50 & 4 \end{bmatrix}$$
 
 **Atenção:** A multiplicação de matrizes **não é comutativa**. Geralmente, $A \cdot B \neq B \cdot A$.
