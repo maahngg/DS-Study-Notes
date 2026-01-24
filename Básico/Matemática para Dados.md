@@ -483,9 +483,7 @@ Uma matriz é uma estrutura matemática organizada em linhas e colunas. Enquanto
 Em Ciência de Dados, as matrizes são onipresentes. A analogia mais direta é um **DataFrame** (tabela de dados):
 
 - Cada **linha** representa uma observação (ex.: um cliente).
-    
 - Cada **coluna** representa um atributo ou "feature" (ex.: idade, renda).
-    
 
 ### Notação e Dimensão
 
@@ -538,11 +536,50 @@ Condição: As matrizes devem ter exatamente as mesmas dimensões.
 
 $$\begin{bmatrix} 1 & 2 \cr 3 & 4 \end{bmatrix} + \begin{bmatrix} 10 & 1 \cr 0 & 2 \end{bmatrix} = \begin{bmatrix} 11 & 3 \cr 3 & 6 \end{bmatrix}$$
 
+**Propriedades da Soma Matricial:**
+
+Considerando matrizes $A, B, C$ de mesma dimensão e $O$ como a matriz nula (preenchida por zeros):
+
+1. **Comutatividade:** A ordem da soma não altera o resultado.
+
+$$A + B = B + A$$  
+2. **Associatividade:** O agrupamento das somas não altera o resultado.
+
+$$(A + B) + C = A + (B + C)$$
+
+3. **Elemento Neutro:** Somar uma matriz com a matriz nula resulta nela mesma.
+
+$$A + O = A$$
+
+4. **Elemento Oposto:** Para toda matriz $A$, existe uma matriz $-A$ tal que a soma é nula.
+
+$$A + (-A) = O$$
+
 #### Multiplicação por Escalar
 
 Multiplica-se cada elemento da matriz pelo número real $k$.
 
 $$2 \cdot \begin{bmatrix} 1 & 2 \cr 3 & 4 \end{bmatrix} = \begin{bmatrix} 2 & 4 \cr 6 & 8 \end{bmatrix}$$
+
+**Propriedades da Multiplicação por Escalar:**
+
+Considerando matrizes $A, B$, e escalares (números reais) $k, c$:
+
+1. **Distributividade em relação à soma de matrizes:**
+
+$$k(A + B) = kA + kB$$
+
+2. **Distributividade em relação à soma de escalares:**
+
+$$(k + c)A = kA + cA$$
+
+3. **Associatividade mista:**
+
+$$k(cA) = (kc)A$$
+
+4. **Identidade:** Multiplicar pelo escalar 1 não altera a matriz.
+
+$$1 \cdot A = A$$
 
 #### Multiplicação de Matrizes (Produto Matricial)
 
@@ -576,4 +613,83 @@ Matriz final:
 
 $$A \cdot B = \begin{bmatrix} (1\cdot5 + 2\cdot7) & (1\cdot6 + 2\cdot8) & (1\cdot0 + 2\cdot1) \cr (3\cdot5 + 4\cdot7) & (3\cdot6 + 4\cdot8) & (3\cdot0 + 4\cdot1) \end{bmatrix} = \begin{bmatrix} 19 & 22 & 2 \cr 43 & 50 & 4 \end{bmatrix}$$
 
-**Atenção:** A multiplicação de matrizes **não é comutativa**. Geralmente, $A \cdot B \neq B \cdot A$.
+**Propriedades da Multiplicação Matricial:**
+
+Considerando as dimensões compatíveis para que as operações existam:
+
+1. **Não Comutatividade:** Esta é a propriedade mais importante. A ordem importa.
+
+$$A \cdot B \neq B \cdot A$$
+
+_(Exceto em casos muito específicos, como multiplicação pela inversa ou identidade)._
+
+2. **Associatividade:** Podemos agrupar as multiplicações, o que é vital para otimização de algoritmos.
+
+$$(A \cdot B) \cdot C = A \cdot (B \cdot C)$$
+
+3. **Distributividade:** A multiplicação se distribui sobre a soma.
+
+$$A \cdot (B + C) = A \cdot B + A \cdot C$$
+$$(A + B) \cdot C = A \cdot C + B \cdot C$$
+
+4. **Elemento Neutro (Identidade):** A matriz Identidade $I$ funciona como o "1" da multiplicação.
+
+$$A \cdot I = A \quad \text{e} \quad I \cdot A = A$$
+
+5. **Transposta do Produto:** A transposta de um produto é o produto das transpostas em **ordem inversa**. (Muito usada em derivações de Machine Learning).
+
+$$(A \cdot B)^T = B^T \cdot A^T$$
+
+### Determinantes
+
+O determinante é um escalar que pode ser calculado a partir de uma **matriz quadrada**. Ele resume propriedades importantes da matriz, como se ela possui inversa e como ela transforma volumes e áreas no espaço.
+
+Denotamos o determinante de uma matriz $A$ como $\text{det}(A)$ ou $|A|$.
+
+#### Cálculo de Determinantes
+
+##### Matriz $2 \times 2$
+
+Para uma matriz de ordem 2, o determinante é a diferença entre o produto dos elementos da diagonal principal e o da diagonal secundária.
+
+Se $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$, então:
+
+$$\text{det}(A) = (a \cdot d) - (b \cdot c)$$
+
+##### Matriz $3 \times 3$ (Regra de Sarrus)
+
+Para matrizes $3 \times 3$, uma técnica comum é repetir as duas primeiras colunas ao lado da matriz e somar os produtos das diagonais principais, subtraindo os produtos das diagonais secundárias.
+
+#### Propriedades e Significados
+
+1. **Inversibilidade:** Uma matriz $A$ só possui inversa se $\text{det}(A) \neq 0$. Se o determinante for zero, a matriz é chamada de **singular**.
+2. **Transformação Linear:** Geometricamente, o valor absoluto do determinante representa o fator de escala pelo qual a matriz aumenta ou diminui áreas (em $\mathbb{R}^2$) ou volumes (em $\mathbb{R}^3$).
+3. **Sinal:** O sinal do determinante indica se a transformação preserva ou inverte a orientação dos eixos.
+
+#### Aplicações em Ciência de Dados
+
+Toda a teoria de vetores, matrizes e determinantes não é apenas acadêmica; ela forma o motor matemático por trás dos algoritmos modernos.
+
+##### 1. Representação de Dados
+
+Como vimos, cada registro em um banco de dados é um **vetor** em um espaço $n$-dimensional. O conjunto de dados inteiro é uma grande **matriz**, onde as linhas são observações e as colunas são as características (_features_).
+
+##### 2. PCA (Análise de Componentes Principais)
+
+O PCA é uma técnica de redução de dimensionalidade. Quando temos dados com centenas de colunas (dimensões), o PCA utiliza a álgebra linear para encontrar novas direções (vetores) chamadas **Componentes Principais** que retêm a maior parte da informação original.
+
+- **Autovetores e Autovalores:** O PCA calcula os autovetores da matriz de covariância dos dados. Esses vetores definem os novos eixos.
+- **Redução de Ruído:** Ao descartar componentes com baixos "autovalores" (determinados via operações matriciais), simplificamos o modelo sem perder o padrão essencial.
+
+
+##### 3. Sistemas de Recomendação
+
+Empresas como Netflix e Amazon utilizam a **Decomposição de Matrizes** para prever suas preferências. Eles decompõem uma matriz gigante de "Usuários vs. Itens" em matrizes menores que representam gostos latentes, permitindo encontrar padrões ocultos entre o que você gosta e o que o sistema deve recomendar.
+
+##### 4. Machine Learning e Otimização
+
+Algoritmos de Regressão Linear, por exemplo, resolvem equações matriciais para encontrar os pesos ideais de um modelo. A operação base é muitas vezes a inversão de uma matriz ou o cálculo de um produto escalar em larga escala.
+
+---
+
+## Funções
