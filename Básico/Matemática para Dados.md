@@ -693,3 +693,323 @@ Algoritmos de Regressão Linear, por exemplo, resolvem equações matriciais par
 ---
 
 ## Funções
+
+Em Matemática e Ciência de Dados, o conceito de função é fundamental para modelar relacionamentos entre variáveis. Uma função descreve como uma entrada (input) é transformada em uma saída (output).
+
+Formalmente, dados dois conjuntos $A$ e $B$, uma função $f$ é uma regra que associa cada elemento $x \in A$ a um **único** elemento $y \in B$.
+
+Notação:
+
+$$f: A \to B$$
+
+$$y = f(x)$$
+
+Onde:
+
+- **Domínio ($A$):** Conjunto de todos os valores de entrada possíveis. 
+- **Contradomínio ($B$):** Conjunto que contém todos os valores de saída possíveis.
+- **Imagem:** Subconjunto de $B$ contendo apenas os valores efetivamente alcançados pela função.
+
+**No contexto de Dados:**
+
+Podemos encarar um modelo de Machine Learning como uma função $f(x)$ que tenta mapear características de entrada ($x$, as _features_) para uma predição ($y$, o _target_).
+
+### Função de 1º grau (Função Afim)
+
+Também conhecida como função linear ou afim, descreve um comportamento de crescimento ou decrescimento constante. É a base para algoritmos de **Regressão Linear**.
+
+Sua lei de formação é dada por:
+
+$$f(x) = ax + b$$
+
+Onde $a, b \in \mathbb{R}$ e $a \neq 0$.
+
+- **$a$ (Coeficiente Angular):** Determina a inclinação da reta.
+
+	- Se $a > 0$: Função crescente.
+    - Se $a < 0$: Função decrescente.
+    - Em dados, $a$ representa o "peso" ou a importância da variável $x$.
+
+- **$b$ (Coeficiente Linear):** Indica onde a reta corta o eixo $y$ (quando $x=0$). Em Machine Learning, é chamado de **Viés (Bias)** ou Intercepto.
+
+**Gráfico:**
+
+O gráfico de uma função de 1º grau é sempre uma **reta**.
+
+**Raiz da função:**
+
+O valor de $x$ que torna $f(x) = 0$.
+
+$$x = -\frac{b}{a}$$
+
+### Função de 2º grau (Função Quadrática)
+
+Uma função quadrática é caracterizada pela presença de um termo elevado ao quadrado. Ela é crucial em Otimização e Ciência de Dados, pois muitas **Funções de Custo** (que medem o erro de um modelo) possuem formato quadrático (parábolas).
+
+Sua lei de formação é:
+
+$$f(x) = ax^2 + bx + c$$
+
+Onde $a, b, c \in \mathbb{R}$ e $a \neq 0$.
+
+**Gráfico:**
+
+O gráfico é uma **parábola**.
+
+- **Concavidade:**
+
+    - Se $a > 0$: Concavidade para cima (sorriso). Possui um ponto de **Mínimo**.
+    - Se $a < 0$: Concavidade para baixo (triste). Possui um ponto de **Máximo**.
+
+**Vértice da Parábola:**
+
+O vértice é o ponto de virada da função (o ponto máximo ou mínimo global). Em algoritmos como o _Gradient Descent_, o objetivo é justamente encontrar o ponto mínimo da função de erro.
+
+As coordenadas do vértice $V = (x_v, y_v)$ são:
+
+$$x_v = -\frac{b}{2a}$$
+
+$$y_v = -\frac{\Delta}{4a}$$
+
+**Fórmula de Bhaskara (Raízes):**
+
+Para encontrar onde a parábola corta o eixo $x$ (fazer $f(x)=0$):
+
+$$x = \frac{-b \pm \sqrt{\Delta}}{2a}$$
+
+Onde o discriminante é $\Delta = b^2 - 4ac$.
+
+### Função Polinomial
+
+As funções de 1º e 2º grau são casos específicos de uma família maior chamada Funções Polinomiais.
+
+Um polinômio é uma expressão algébrica formada pela soma de monômios (termos da forma $a \cdot x^n$).
+
+A forma geral de uma função polinomial de grau $n$ é:
+
+$$P(x) = a_n x^n + a_{n-1} x^{n-1} + \dots + a_1 x + a_0$$
+
+Onde:
+
+- $n$ é um número inteiro não negativo (o **grau** do polinômio).
+- $a_n, a_{n-1}, \dots, a_0$ são constantes reais chamadas de **coeficientes**.
+- $a_n \neq 0$ (o coeficiente dominante).
+
+**Resumo sobre Polinômios em Dados:**
+
+Polinômios de graus mais altos podem desenhar curvas extremamente complexas e cheias de curvas.
+
+- **Grau 1:** Reta (Simples).
+- **Grau 2:** Parábola (Curva simples).
+- **Grau Alto (ex: 5):** Curva muito sinuosa.
+
+_Atenção:_ Em Machine Learning, usar polinômios de grau muito alto para modelar dados pode levar ao **Overfitting** (o modelo "decora" o ruído dos dados ao invés de aprender o padrão geral).
+
+#### Raízes de polinômios
+
+As raízes (ou zeros) de um polinômio são os valores de $x$ tal que $P(x) = 0$. Geometricamente, são os pontos onde o gráfico intercepta o eixo horizontal ($x$).
+
+**Propriedades Importantes:**
+
+1. **Teorema Fundamental da Álgebra:** Todo polinômio de grau $n$ ($n \geq 1$) possui exatamente $n$ raízes complexas (podendo algumas ser reais e outras não, ou raízes repetidas).
+2. **Decomposição:** Se conhecermos as raízes $r_1, r_2, \dots, r_n$ de um polinômio, podemos reescrevê-lo na forma fatorada:
+
+$$P(x) = a_n(x - r_1)(x - r_2)\dots(x - r_n)$$
+
+Isso é útil para simplificar equações e entender o comportamento da função perto de seus zeros.
+
+---
+
+## Cálculo diferencial
+
+O Cálculo Diferencial é o ramo da matemática que estuda como as coisas mudam. Ele foca nas **taxas de variação** de grandezas e na inclinação de curvas.
+
+Em Ciência de Dados e Machine Learning, o cálculo diferencial é a "espinha dorsal" do treinamento de modelos. A maioria dos algoritmos "aprende" através de um processo de otimização (como o _Gradient Descent_), onde o objetivo é encontrar o ponto mínimo de uma função de erro. O cálculo fornece as ferramentas para determinar a direção e o tamanho do passo necessário para alcançar esse mínimo.
+
+### Limites
+
+O conceito de limite é a base fundamental sobre a qual todo o cálculo é construído (incluindo derivadas e integrais). Informalmente, o limite descreve o comportamento de uma função à medida que sua entrada ($x$) se aproxima arbitrariamente de um determinado valor, independentemente do que acontece no ponto exato.
+
+**Notação:**
+
+$$\lim_{x \to a} f(x) = L$$
+
+Lê-se: "O limite de $f(x)$ quando $x$ tende a $a$ é igual a $L$".
+
+Isso significa que podemos tornar o valor de $f(x)$ tão próximo de $L$ quanto quisermos, desde que escolhamos um $x$ suficientemente próximo de $a$ (mas diferente de $a$).
+
+**Existência do Limite:**
+
+Para que um limite exista, o comportamento da função deve ser o mesmo, independentemente de nos aproximarmos de $a$ por valores maiores (direita) ou menores (esquerda).
+
+- **Limite à Esquerda ($x \to a^-$):** Aproximação por valores menores que $a$.
+- **Limite à Direita ($x \to a^+$):** Aproximação por valores maiores que $a$.
+
+Para o limite existir, é necessário que:
+
+$$\lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = L$$
+
+**Exemplos:**
+
+1. **Substituição Direta (Funções Contínuas):**
+    Se a função não apresenta problemas no ponto $a$ (como divisão por zero), o limite é simplesmente o valor da função no ponto.
+
+    Seja $f(x) = x^2 + 2$:
+
+$$\lim_{x \to 3} (x^2 + 2) = 3^2 + 2 = 11$$
+
+2. **Indeterminações (A base da derivada):**
+    Limites tornam-se poderosos quando lidam com situações onde a substituição direta resulta em erros matemáticos, como $\frac{0}{0}$.
+
+    Seja $f(x) = \frac{x^2 - 1}{x - 1}$. Se tentarmos calcular para $x=1$, teremos $\frac{0}{0}$.
+
+    Usando fatoração algébrica para simplificar:
+
+$$\lim_{x \to 1} \frac{(x-1)(x+1)}{(x-1)} = \lim_{x \to 1} (x+1) = 2$$
+
+**Importância para Dados:**
+
+Embora raramente calculemos limites manualmente em scripts de Python, o conceito é vital para entender **Derivadas**. A derivada é definida formalmente como um limite de uma taxa de variação média:
+
+$$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$
+
+Sem o conceito de limite (aproximar $h$ de 0 sem que ele seja 0), não poderíamos calcular gradientes, e consequentemente, não conseguiríamos treinar redes neurais.
+
+### Derivada
+
+A derivada é a ferramenta matemática que quantifica a sensibilidade de mudança de uma função. Se uma função $f(x)$ descreve um fenômeno, a sua derivada $f'(x)$ descreve **como** esse fenômeno está mudando em um instante específico.
+
+Geometricamente, a derivada de uma função em um ponto é igual à **inclinação (coeficiente angular) da reta tangente** à curva naquele ponto.
+
+**Notação:**
+
+Existem duas notações principais que você encontrará em livros e artigos de Machine Learning:
+
+- **Lagrange:** $f'(x)$ ou $y'$
+
+- **Leibniz:** $\frac{df}{dx}$ ou $\frac{dy}{dx}$ (Lê-se "derivada de f em relação a x")
+
+**Interpretação do Sinal:**
+
+O valor da derivada em um ponto nos diz muito sobre o comportamento da função:
+
+- **$f'(x) > 0$:** A função é **crescente** naquele ponto.
+- **$f'(x) < 0$:** A função é **decrescente** naquele ponto.
+- **$f'(x) = 0$:** A função está em um ponto estacionário (possivelmente um **Máximo** ou **Mínimo** local).
+
+Em Ciência de Dados, nosso principal interesse é encontrar onde a derivada é zero, pois isso indica que podemos ter encontrado o erro mínimo do nosso modelo.
+
+#### Interpretação Geométrica: A Reta Tangente
+
+A forma mais intuitiva de visualizar a derivada é através da geometria analítica. Para entender isso, precisamos revisitar o conceito de inclinação (coeficiente angular) de uma reta.
+
+Se tivermos dois pontos em um gráfico, a inclinação da reta que os conecta é dada pela razão entre a variação vertical e a variação horizontal:
+
+$$m = \frac{\Delta y}{\Delta x} = \frac{y_2 - y_1}{x_2 - x_1}$$
+
+Quando esses dois pontos estão distantes na curva de uma função $f(x)$, a reta que os une é chamada de **Reta Secante**. Ela representa a _taxa média_ de variação naquele intervalo.
+
+**O Pulo para a Derivada**
+
+A derivada surge quando tentamos calcular essa inclinação usando dois pontos que estão **infinitamente próximos**.
+
+Imagine que começamos a aproximar o segundo ponto em direção ao primeiro. A distância horizontal ($\Delta x$) começa a diminuir.
+
+1. À medida que $\Delta x$ se aproxima de zero, a Reta Secante começa a girar.
+2. No limite, quando $\Delta x \to 0$, essa reta toca a curva em apenas um ponto. Ela se torna a **Reta Tangente**.
+
+Assim, a derivada $f'(x)$ nada mais é do que a inclinação dessa reta tangente. Matematicamente, definimos isso como o limite da razão $\frac{\Delta y}{\Delta x}$:
+
+$$f'(x) = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x} = \lim_{\Delta x \to 0} \frac{f(x+\Delta x) - f(x)}{\Delta x}$$
+
+**Resumo visual:**
+
+- **$\frac{\Delta y}{\Delta x}$ (sem limite):** Inclinação média entre dois pontos (Secante).
+
+- **$\frac{dy}{dx}$ (com limite):** Inclinação exata em um ponto (Tangente/Derivada).
+
+#### Regras Básicas de Derivação
+
+Para calcular derivadas, raramente usamos a definição de limite. Usamos regras práticas. As mais comuns são:
+
+**1. Derivada de uma Constante:**
+
+A derivada de um número fixo é sempre zero (pois ele não muda).
+
+$$f(x) = k \implies f'(x) = 0$$
+
+**2. Regra da Potência (Regra do Tombo):**
+
+Essa é a regra mais utilizada para polinômios.
+
+$$f(x) = x^n \implies f'(x) = n \cdot x^{n-1}$$
+
+Ex.:
+
+Se $f(x) = x^2$ (Função Quadrática/Parábola):
+
+$f'(x) = 2x^{2-1} = 2x$
+
+**3. Derivada da Soma:**
+
+A derivada de uma soma de funções é a soma das derivadas.
+
+$$h(x) = f(x) + g(x) \implies h'(x) = f'(x) + g'(x)$$
+
+**4. Regra da Cadeia (Chain Rule):**
+
+Fundamental para **Redes Neurais** (algoritmo _Backpropagation_). Serve para derivar funções compostas (função dentro de função).
+
+$$h(x) = f(g(x)) \implies h'(x) = f'(g(x)) \cdot g'(x)$$
+
+"Deriva a de fora (mantendo a de dentro) e multiplica pela derivada da de dentro".
+
+#### Máximos e Mínimos
+
+Uma das aplicações mais importantes das derivadas em Ciência de Dados é a **Otimização**. Otimizar um modelo significa, na maioria das vezes, encontrar os melhores parâmetros para minimizar o erro. Para isso, precisamos identificar os pontos de Máximo e Mínimo de uma função.
+
+Como vimos anteriormente, a derivada $f'(x)$ representa a inclinação da reta tangente. Imagine o pico de uma montanha (máximo) ou o fundo de um vale (mínimo): nestes pontos exatos, a inclinação é nula (a reta tangente é horizontal).
+
+Portanto, a condição necessária para um ponto ser um máximo ou um mínimo local é:
+
+$$f'(x) = 0$$
+
+Esses pontos onde a derivada é zero são chamados de **Pontos Críticos**.
+
+**Classificação:**
+
+Embora $f'(x) = 0$ indique um ponto crítico, precisamos saber se ele é um topo ou um fundo.
+
+1. **Máximo Local:** O gráfico sobe antes do ponto e desce depois. A derivada muda de positiva para negativa.
+2. **Mínimo Local:** O gráfico desce antes do ponto e sobe depois. A derivada muda de negativa para positiva.
+
+**No contexto de Dados (Função de Custo):**
+
+Em Machine Learning, definimos uma "Função de Custo" (ou _Loss Function_) que mede o quão ruim é o nosso modelo. O gráfico dessa função geralmente se assemelha a um vale.
+
+- Nosso objetivo é encontrar o **Mínimo Global** dessa função (o ponto mais baixo do vale).
+- Nesse ponto mínimo, o erro é o menor possível e a derivada é zero.
+- Algoritmos de otimização utilizam a derivada para "saber para onde descer" até encontrar esse ponto onde a inclinação se anula.
+
+#### Derivadas Parciais e o Gradiente
+
+Na maioria dos problemas de dados, trabalhamos com funções de **múltiplas variáveis** (ex.: erro dependendo de vários pesos $w_1, w_2, ...$).
+
+Quando derivamos em relação a uma variável específica, tratamos todas as outras como se fossem constantes. Isso é chamado de **Derivada Parcial**.
+
+Notação: $\frac{\partial f}{\partial x}$ (usa-se o símbolo "del" $\partial$).
+
+Ex.: Seja $f(x, y) = x^2 + 3y$.
+
+- Derivada em relação a $x$: $\frac{\partial f}{\partial x} = 2x$ (o termo $3y$ é tratado como constante e vira 0).
+- Derivada em relação a $y$: $\frac{\partial f}{\partial y} = 3$ (o termo $x^2$ vira 0, e a derivada de $3y$ é 3).
+
+**O Gradiente ($\nabla$):**
+
+O Gradiente é um **vetor** que agrupa todas as derivadas parciais de uma função.
+
+$$\nabla f = \left[ \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, ..., \frac{\partial f}{\partial x_n} \right]$$
+
+**Aplicação Fundamental:** O vetor gradiente sempre aponta na direção de **maior crescimento** da função.
+
+Por isso, no algoritmo de **Gradient Descent**, nós andamos na direção oposta ao gradiente ($-\nabla f$) para "descer a montanha" e encontrar o erro mínimo.
