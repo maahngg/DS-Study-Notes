@@ -30,7 +30,8 @@
 > *Conceitos fundamentais para iniciar a jornada.*
 - [x] [Python Básico](./Básico/Python%20Básico.md)
 - [x] [Python Básico - Cheat Sheet](./Básico/Python%20Básico%20-%20Cheat%20Sheet.md)
-- [ ] [Matemática para Dados](./Básico/Matemática%20para%20Dados.md)
+- [x] [Matemática para Dados](./Básico/Matemática%20para%20Dados.md)
+- [ ] [SQLite Online](./Básico/SQLite%20Online.md)
 
 ### 🟡 Nível 02: Iniciante
 > *Manipulação de dados, SQL, primeiro contato com ML.*
