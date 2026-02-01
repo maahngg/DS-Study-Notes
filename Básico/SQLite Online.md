@@ -52,23 +52,39 @@ Existem diversos SGBDs no mercado que "falam" SQL, cada um com suas peculiaridad
 
 Agora que entendemos o conceito de banco de dados relacional e o papel do SGBD, vamos colocar a mão na massa com os comandos fundamentais do SQL.
 
-#### CREATE TABLE (Criando a Estrutura)
+**A Hierarquia dos Dados**
 
-Antes de podermos inserir ou consultar qualquer dado, precisamos definir a estrutura onde esses dados viverão. No modelo relacional, isso significa criar uma **Tabela**.
+Antes de criarmos objetos, precisamos entender que os SGBDs organizam as informações em níveis de contêineres:
 
-O comando `CREATE TABLE` define o "esqueleto" da tabela. Você precisa dar um nome à tabela e definir quais colunas (atributos) ela terá, bem como o tipo de dado de cada coluna.
+1. **Database (Banco de Dados):** O contêiner de nível mais alto que agrupa todos os dados relacionados a um sistema ou aplicação.
+2. **Schema (Esquema):** Uma camada lógica dentro do banco de dados que organiza as tabelas, funcionando como "pastas" para separar diferentes áreas (ex: esquema `vendas`, esquema `RH`).
+3. **Table (Tabela):** Onde os dados residem de fato, organizados em linhas e colunas.
 
-**Sintaxe Básica:**
+#### CREATE (Criando a Estrutura)
+
+O comando `CREATE` é utilizado para dar vida a esses contêineres.
+
+##### 1. CREATE DATABASE
+
+Cria o ambiente principal onde tudo será armazenado.
 
 ```sql
-CREATE TABLE nome_da_tabela (
-    coluna1 tipo_do_dado,
-    coluna2 tipo_do_dado,
-    coluna3 tipo_do_dado
-);
+CREATE DATABASE NomeDoBanco;
 ```
 
-**Exemplo Prático:** Imagine criar uma tabela para guardar informações de clientes.
+##### 2. CREATE SCHEMA
+
+Utilizado para organizar grupos de tabelas dentro do banco.
+
+```sql
+CREATE SCHEMA NomeDoEsquema;
+```
+
+##### 3. CREATE TABLE
+
+Define o "esqueleto" da tabela onde os registros serão inseridos. Você precisa definir o nome da tabela, suas colunas e os respectivos tipos de dados.
+
+**Exemplo Prático:**
 
 ```sql
 CREATE TABLE Clientes (
@@ -80,6 +96,76 @@ CREATE TABLE Clientes (
 ```
 
 _Neste exemplo, definimos que o ID é um número inteiro, o Nome é texto, a Idade é um inteiro e a Cidade é texto._
+
+**Entendendo a PRIMARY KEY (Chave Primária)**
+
+Você deve ter notado o termo `PRIMARY KEY` ao lado da coluna `ID`. Este é um dos conceitos mais importantes em bancos de dados.
+
+A **Chave Primária** é uma restrição que garante que a coluna escolhida sirva como o **identificador único** de cada linha da tabela. Ela segue duas regras de ouro:
+
+1.  **Unicidade:** Não podem existir dois registros com o mesmo valor nesta coluna (ex: dois clientes não podem ter o mesmo ID).
+2.  **Não Nulo:** O valor nunca pode ser vazio.
+
+**Analogia:** Pense na Chave Primária como o **CPF** de uma pessoa. Podem existir várias pessoas com o nome "João Silva" e a mesma idade, mas o CPF é o que distingue um João do outro inequivocamente no sistema.
+
+**Conectando Tabelas: A FOREIGN KEY (Chave Estrangeira)**
+
+Se a Chave Primária identifica quem é quem, a **Chave Estrangeira** serve para criar um elo entre duas tabelas. É uma coluna (ou conjunto de colunas) em uma tabela que aponta para a Chave Primária de outra tabela.
+
+Para ilustrar, vamos criar uma tabela de `Pedidos`. Cada pedido precisa pertencer a um cliente que já existe na tabela `Clientes` criada acima.
+
+```sql
+CREATE TABLE Pedidos (
+    ID INTEGER PRIMARY KEY,
+    DataPedido DATE,
+    ValorTotal REAL,
+    Cliente_ID INTEGER,
+    FOREIGN KEY (Cliente_ID) REFERENCES Clientes(ID)
+);
+```
+
+**O que este comando faz?**
+
+- **`Cliente_ID INTEGER`:** Cria uma coluna para guardar o ID do cliente.
+- **`FOREIGN KEY... REFERENCES...`:** Cria a regra de segurança (Restrição). O banco de dados agora sabe que o valor inserido em `Cliente_ID` na tabela de pedidos **OBRIGATORIAMENTE** precisa existir na coluna `ID` da tabela `Clientes`.
+
+**Integridade Referencial:** Isso impede erros comuns, como cadastrar uma venda para um cliente que não existe ou excluir um cliente que ainda possui pedidos pendentes (o banco bloqueará a exclusão para não deixar o pedido "órfão").
+
+
+#### INSERT (Inserindo Dados)
+
+Agora que criamos o "esqueleto" das nossas tabelas, elas ainda estão vazias. O comando `INSERT` é utilizado para adicionar registros (linhas) a uma tabela. Ele corresponde ao "Create" do acrônimo CRUD.
+
+Para inserir dados, precisamos dizer ao banco em qual tabela queremos entrar, quais colunas vamos preencher e, finalmente, quais os valores.
+
+**Sintaxe Básica:**
+
+```sql
+INSERT INTO nome_da_tabela (coluna1, coluna2, coluna3)
+VALUES (valor1, valor2, valor3);
+```
+
+**Exemplo Prático:**
+
+Vamos inserir um novo cliente na tabela `Clientes` que criamos anteriormente.
+
+```sql
+INSERT INTO Clientes (ID, Nome, Idade, Cidade)
+VALUES (1, 'Ana Pereira', 28, 'Curitiba');
+```
+
+**Pontos Importantes sobre o INSERT:**
+
+- **Correspondência:** A ordem dos valores dentro de `VALUES` deve corresponder exatamente à ordem das colunas listadas entre parênteses após o nome da tabela.
+- **Tipos de Dados:** Se a coluna espera um número (INTEGER), não envie texto. Se espera texto (TEXT), lembre-se de colocar o valor entre aspas simples (`'texto'`).
+- **Inserção Múltipla:** É possível inserir vários registros de uma vez separando os grupos de valores por vírgula:
+
+```sql
+INSERT INTO Clientes (ID, Nome, Idade, Cidade)
+VALUES
+    (2, 'Bruno Costa', 35, 'São Paulo'),
+    (3, 'Carla Diaz', 22, 'Rio de Janeiro');
+```
 
 #### SELECT (Consultando Dados)
 
@@ -154,3 +240,97 @@ A cláusula `WHERE` age como um filtro. Ela diz ao banco de dados: "Traga os dad
    SELECT * FROM Clientes
    WHERE Cidade = 'Rio de Janeiro' AND Idade > 18;
 ```
+
+### Modificando e Excluindo Estruturas
+
+Nem sempre a estrutura que definimos inicialmente (o esquema) permanece a mesma para sempre. Requisitos de projetos mudam, e o banco de dados precisa acompanhar essas evoluções. Para isso, utilizamos comandos que alteram o "esqueleto" das tabelas ou as removem por completo.
+
+#### ALTER TABLE (Alterando a Estrutura)
+
+O comando `ALTER TABLE` é utilizado quando precisamos modificar uma tabela já existente sem perder os dados que já foram inseridos nela. O uso mais comum é a adição de novas colunas para acomodar novas informações.
+
+**Sintaxe Básica:**
+
+```sql
+ALTER TABLE nome_da_tabela ADD nome_da_coluna tipo_de_dado;
+```
+
+**Exemplo Prático:**
+
+Imagine que, após criar a tabela `Clientes`, percebemos que esquecemos de incluir um campo para o e-mail. Podemos adicionar essa coluna agora:
+
+```sql
+ALTER TABLE Clientes ADD Email TEXT;
+```
+
+_Agora, a tabela Clientes possui uma nova coluna "Email". Os registros que já existiam ficarão com este campo vazio (NULL) até que sejam atualizados._
+
+Para excluir uma coluna de uma tabela, usamos a sintaxe:
+
+```sql
+ALTER TABLE nome_da_tabela
+DROP COLUMN nome_da_coluna;
+```
+
+Por exemplo:
+
+```sql
+ALTER TABLE Estudantes
+DROP COLUMN Idade;
+```
+
+#### DROP (Excluindo Objetos)
+
+O comando `DROP` é drástico e deve ser usado com extrema cautela. É fundamental não confundi-lo com o `DELETE`:
+
+- **DELETE:** Remove os dados (linhas) de dentro da tabela, mas a tabela continua existindo.
+- **DROP:** Remove a **tabela inteira** (o contêiner, a estrutura e todos os dados) do banco de dados. É como demolir a casa em vez de apenas tirar os móveis.
+
+**Sintaxe Básica:**
+
+```sql
+DROP TABLE nome_da_tabela;
+```
+
+**Exemplo:**
+
+```sql
+-- Remove completamente a tabela Clientes e todos os seus registros
+DROP TABLE Clientes;
+```
+
+_Uma vez executado, a tabela deixa de existir no esquema. Em muitos SGBDs, não há como desfazer (undo) essa operação facilmente._
+
+### Tipos de Dados
+
+Os bancos de dados armazenam uma variedade de tipos de dados. A escolha dos tipos de dados depende da natureza dos dados.
+
+#### Texto (String)
+
+- **CHAR:** Armazena strings de tamanho fixo. Usado quando os valores têm um comprimento constante.
+- **VARCHAR:** Armazena strings de tamanho variável. Apropriado para valores com comprimentos variáveis.
+- **TEXTO (TEXT):** Armazena strings muito longas, como documentos ou descrições.
+
+#### Numérico
+
+- **INTEGER (INT):** Armazena números inteiros.
+- **FLOAT:** Armazena números de ponto flutuante, geralmente usados para valores com casas decimais.
+- **NUMERIC (DECIMAL):** Armazena números com uma precisão específica, geralmente usados em aplicações financeiras.
+
+#### Data e Hora
+
+- **DATE:** Armazena datas sem informações de horário.
+- **TIME:** Armazena informações de horário.
+- **TIMESTAMP:** Combina data e horário em um único tipo.
+
+#### Booleano
+
+- **BOOLEAN (BOOL):** Armazena valores verdadeiros ou falsos.
+
+#### Binário
+
+- **BLOB (Binary Large Object):** Armazena dados binários, como imagens, vídeos ou arquivos.
+- **BIT:** Armazena valores binários, como 0 ou 1.
+
+Vale ressaltar que a escolha dos tipos de dados pode variar dependendo do sistema de gerenciamento de banco de dados (SGBD) e das necessidades específicas de um aplicativo. Além disso, alguns SGBDs também oferecem tipos de dados personalizados que podem ser adaptados para requisitos de negócios.
+
