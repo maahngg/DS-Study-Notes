@@ -189,6 +189,57 @@ SELECT * FROM Clientes;
 SELECT Nome, Cidade FROM Clientes;
 ```
 
+#### UPDATE (Atualizando Dados)
+
+O comando `UPDATE` é utilizado para modificar registros que já existem em uma tabela. Ele corresponde ao "Update" do acrônimo CRUD.
+
+**Atenção:** É fundamental utilizar a cláusula `WHERE` ao executar um `UPDATE`. Se você esquecer o `WHERE`, o banco de dados atualizará **todas** as linhas da tabela de uma só vez.
+
+**Sintaxe Básica:**
+
+```sql
+UPDATE nome_da_tabela
+SET coluna1 = novo_valor1, coluna2 = novo_valor2
+WHERE condicao;
+```
+
+**Exemplo Prático:** Imagine que a cliente Ana Pereira mudou de cidade. Precisamos atualizar o registro dela:
+
+```sql
+UPDATE Clientes
+SET Cidade = 'Florianópolis'
+WHERE ID = 1;
+```
+
+**Pontos Importantes:**
+
+- **Múltiplas Colunas:** Você pode alterar vários campos ao mesmo tempo separando-os por vírgula. 
+- **Segurança:** Sempre verifique a condição do `WHERE` (geralmente usando a Chave Primária) para garantir que está alterando apenas o registro desejado.
+
+#### DELETE (Removendo Dados)
+
+O comando `DELETE` é utilizado para excluir linhas de uma tabela. Ele corresponde ao "Delete" do acrônimo CRUD.
+
+Assim como no `UPDATE`, o uso do `WHERE` é crítico. Sem ele, você apagará todos os dados da tabela (embora a estrutura da tabela, as colunas e os tipos de dados permaneçam intactos, ao contrário do comando `DROP`).
+
+**Sintaxe Básica:**
+
+```sql
+DELETE FROM nome_da_tabela
+WHERE condicao;
+```
+
+**Exemplo Prático:** Se um cliente solicitar a exclusão de sua conta ou se um registro for inserido por erro:
+
+```sql
+DELETE FROM Clientes
+WHERE ID = 3;
+```
+
+**Diferença entre DELETE e DROP:**
+
+- **DELETE:** Limpa os móveis de dentro do quarto (os dados), mas o quarto continua lá.
+- **DROP:** Demole o prédio inteiro (a tabela e os dados somem).
 #### DISTINCT (Eliminando Duplicatas)
 
 Muitas vezes, uma tabela contém dados repetidos em certas colunas. Por exemplo, em uma tabela de `Clientes`, várias pessoas podem morar na mesma cidade.
@@ -240,6 +291,195 @@ A cláusula `WHERE` age como um filtro. Ela diz ao banco de dados: "Traga os dad
    SELECT * FROM Clientes
    WHERE Cidade = 'Rio de Janeiro' AND Idade > 18;
 ```
+
+
+**1. Operadores Lógicos (AND, OR, NOT)**
+
+Eles funcionam como a "cola" que une múltiplas condições.
+
+- **AND (E):** Exige que **todas** as condições sejam verdadeiras. É restritivo.
+- **OR (OU):** Exige que **pelo menos uma** condição seja verdadeira. É inclusivo.
+- **NOT (NÃO):** Inverte o resultado da condição. O que era verdadeiro vira falso e vice-versa.
+
+**Exemplo Prático:** Queremos encontrar clientes que sejam de "São Paulo" **OU** do "Rio de Janeiro", mas que **NÃO** tenham 25 anos.
+
+```sql
+SELECT * FROM Clientes
+WHERE (Cidade = 'São Paulo' OR Cidade = 'Rio de Janeiro')
+AND NOT Idade = 25;
+```
+
+**2. O Operador IN (Listas)**
+
+O `OR` é útil, mas imagine filtrar clientes de 10 cidades diferentes. Escrever `Cidade = 'X' OR Cidade = 'Y'...` ficaria enorme. O operador `IN` resolve isso permitindo passar uma lista de valores aceitos.
+
+```sql
+-- Seleciona clientes que moram em qualquer uma destas três cidades
+SELECT * FROM Clientes
+WHERE Cidade IN ('Curitiba', 'Salvador', 'Belo Horizonte');
+```
+
+**3. O Operador BETWEEN (Intervalos)**
+
+Usado para filtrar valores dentro de um intervalo específico (incluindo os valores inicial e final). Funciona muito bem para números e datas.
+
+```sql
+-- Seleciona clientes com idade entre 20 e 30 anos (inclusive)
+SELECT * FROM Clientes
+WHERE Idade BETWEEN 20 AND 30;
+```
+
+**4. O Operador LIKE (Busca por Padrões)**
+
+Às vezes, não sabemos o texto exato que estamos procurando, ou queremos encontrar partes de um texto. O `LIKE` é usado para buscar padrões dentro de colunas de texto (strings). Ele utiliza dois caracteres "curinga":
+
+- **`%` (Porcentagem):** Representa "qualquer quantidade de caracteres" (zero ou mais).
+- **`_` (Underline):** Representa "exatamente um caractere".
+
+**Exemplos:**
+
+- Encontrar nomes que **começam** com a letra 'A':
+
+```sql
+SELECT * FROM Clientes WHERE Nome LIKE 'A%';
+```
+_(Encontra: "Ana", "André", "Amanda Pereira")_
+
+- Encontrar nomes que **terminam** com 'Silva':
+
+```sql
+SELECT * FROM Clientes WHERE Nome LIKE '%Silva';
+```
+
+- Encontrar nomes que tenham 'rla' em **qualquer parte** do texto:
+
+```sql
+SELECT * FROM Clientes WHERE Nome LIKE '%rla%';
+```
+_(Encontra: "Carla", "Orlando")_
+
+#### ORDER BY (Ordenando Resultados)
+
+Ao fazer um `SELECT`, o banco de dados não garante que os registros retornem em uma ordem específica. Para organizar a apresentação dos dados — seja alfabeticamente, por data ou por valores numéricos — utilizamos a cláusula `ORDER BY`.
+
+Por padrão, a ordenação é **Ascendente** (do menor para o maior, ou de A a Z).
+
+**Sintaxe Básica:**
+
+```sql
+SELECT colunas FROM tabela
+WHERE condicao
+ORDER BY coluna_para_ordenar;
+```
+
+**1. Ordenação Crescente (ASC) e Decrescente (DESC)**
+
+Embora o padrão seja crescente, podemos forçar a ordem inversa usando a palavra-chave `DESC`. O `ASC` é opcional, mas pode ser usado para clareza.
+
+- **ASC:** Ascendente (1, 2, 3... ou A, B, C...).
+
+- **DESC:** Descendente (3, 2, 1... ou Z, Y, X...).
+
+
+**Exemplo Prático:**
+
+Vamos listar os clientes ordenados do mais velho para o mais novo.
+
+```sql
+SELECT Nome, Idade FROM Clientes
+ORDER BY Idade DESC;
+```
+
+**2. Ordenando por Múltiplas Colunas**
+
+É muito comum precisarmos ordenar por mais de um critério. Por exemplo: "Quero ver a lista de clientes organizada por Cidade e, dentro de cada cidade, quero os nomes em ordem alfabética".
+
+Para isso, basta separar as colunas por vírgula no `ORDER BY`. O banco seguirá a ordem da esquerda para a direita.
+
+```sql
+SELECT * FROM Clientes
+ORDER BY Cidade ASC, Nome ASC;
+```
+
+_Neste caso, o banco agrupa todos os clientes de "Belo Horizonte" primeiro (ordenando esses nomes entre si), depois passa para "Curitiba", e assim por diante._
+
+#### ALIAS (Renomeando Colunas)
+
+Muitas vezes, os nomes das colunas no banco de dados são técnicos, abreviados ou em inglês, o que dificulta a leitura em um relatório final. O SQL permite usar **Aliases** (apelidos) para dar nomes temporários e mais amigáveis a essas colunas ou tabelas nos resultados da sua consulta.
+
+Para isso, utilizamos a palavra-chave `AS`.
+
+**Sintaxe Básica:**
+
+```sql
+SELECT coluna_original AS novo_nome
+FROM tabela;
+```
+
+**Exemplo Prático:**
+
+Imagine que queremos gerar uma lista de preços da tabela `Pedidos`. No banco, a coluna chama-se `ValorTotal`, mas no relatório queremos que apareça escrito "Preço Final".
+
+```sql
+SELECT ID, ValorTotal AS 'Preço Final'
+FROM Pedidos;
+```
+
+_Nota: Se o apelido contiver espaços (como "Preço Final"), é obrigatório o uso de aspas simples ou duplas._
+
+**Aliases em Operações Matemáticas**
+
+O Alias é extremamente útil quando criamos colunas calculadas que não existem fisicamente na tabela. Sem um alias, o banco daria um nome estranho para essa coluna (algo como `col_2`).
+
+Suponha que queremos simular um desconto de 10% no valor dos pedidos:
+
+```sql
+SELECT
+    ID,
+    ValorTotal,
+    (ValorTotal * 0.90) AS ValorComDesconto
+FROM Pedidos;
+```
+
+**Combinando com ORDER BY**
+
+Uma vantagem prática é que você pode reutilizar o apelido que acabou de criar para ordenar os resultados, deixando o código mais limpo.
+
+```sql
+SELECT Nome AS Cliente, Idade
+FROM Clientes
+ORDER BY Cliente ASC;
+```
+
+#### INSERT INTO com SELECT (Cópia de Dados)
+
+Até agora, vimos como inserir dados manualmente, linha por linha. Porém, em cenários reais, frequentemente precisamos copiar dados de uma tabela para outra massivamente.
+
+O comando `INSERT INTO ... SELECT` permite inserir dados em uma tabela de destino baseando-se diretamente nos resultados de uma consulta (`SELECT`) feita em uma tabela de origem. É ideal para criar backups, arquivar dados antigos ou popular tabelas de relatórios.
+
+**Sintaxe Básica:**
+
+```sql
+INSERT INTO tabela_destino (coluna1, coluna2)
+SELECT coluna1, coluna2
+FROM tabela_origem
+WHERE condicao;
+```
+
+**Regra de Ouro:** O número de colunas e os tipos de dados selecionados no `SELECT` devem corresponder exatamente às colunas listadas no `INSERT`.
+
+**Exemplo Prático:**
+
+Imagine que queremos criar uma tabela exclusiva apenas para clientes que moram no Rio de Janeiro, chamada `Clientes_Rio`. Supondo que a tabela já foi criada com o comando `CREATE`, podemos copiar os dados assim:
+
+```sql
+INSERT INTO Clientes_Rio (Nome, Idade)
+SELECT Nome, Idade
+FROM Clientes
+WHERE Cidade = 'Rio de Janeiro';
+```
+
+_Neste exemplo, o banco de dados busca todos os clientes do Rio de Janeiro na tabela original e, instantaneamente, insere seus nomes e idades na nova tabela `Clientes_Rio`._
 
 ### Modificando e Excluindo Estruturas
 
