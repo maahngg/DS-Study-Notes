@@ -574,3 +574,107 @@ Os bancos de dados armazenam uma variedade de tipos de dados. A escolha dos tipo
 
 Vale ressaltar que a escolha dos tipos de dados pode variar dependendo do sistema de gerenciamento de banco de dados (SGBD) e das necessidades específicas de um aplicativo. Além disso, alguns SGBDs também oferecem tipos de dados personalizados que podem ser adaptados para requisitos de negócios.
 
+---
+
+### Cláusula LIMIT
+
+A cláusula `LIMIT` é amplamente utilizada em SGBDs como MySQL, PostgreSQL e SQLite. Sua principal função é restringir o número de registros retornados por uma consulta. Isso é particularmente útil em grandes conjuntos de dados, onde retornar todos os registros pode ser ineficiente ou desnecessário.
+
+**Sintaxe Básica:**
+
+```sql
+SELECT colunas FROM tabela
+LIMIT número;
+```
+
+**Exemplo Prático:**
+
+```sql
+SELECT * FROM clientes
+LIMIT 10;
+```
+
+Este exemplo retorna os primeiros 10 registros da tabela `clientes`.
+
+### Palavra-chave TOP
+
+Por outro lado, a palavra-chave `TOP` é usada em sistemas como Microsoft SQL Server e MS Access. Ela serve ao mesmo propósito que a cláusula `LIMIT`, mas sua sintaxe é diferente.
+
+**Sintaxe Básica:**
+
+```sql
+SELECT TOP número colunas FROM tabela;
+```
+
+**Exemplo Prático:**
+
+```sql
+SELECT TOP 10 * FROM clientes;
+```
+
+Este exemplo, similar ao anterior, retorna os primeiros 10 registros da tabela `clientes`, mas usando a sintaxe específica do SQL Server.
+
+A seleção de qual mecanismo utilizar depende do SGBD em operação. Enquanto `LIMIT` é mais comum em ambientes como MySQL e PostgreSQL, `TOP` é específico para o ambiente Microsoft. Além disso, a cláusula `LIMIT` pode ser acompanhada por `OFFSET` para pular um número específico de linhas, uma funcionalidade que é especialmente útil para implementar paginação em aplicações web.
+
+Por exemplo, para pular os primeiros 10 registros e retornar os seguintes 10, você usaria:
+
+```sql
+SELECT * FROM clientes
+LIMIT 10 OFFSET 10;
+```
+
+#### Trabalhando com Valores Nulos
+
+Ao lidar com bancos de dados, frequentemente encontramos campos que foram deixados em branco. No SQL, a ausência de um valor é representada pela palavra reservada **NULL**.
+
+É fundamental entender que **NULL é diferente de zero (0) ou de um espaço vazio (' ')**.
+
+- **0:** É um número, um valor quantificável.
+- **' ':** É um texto que contém um espaço.
+- **NULL:** É o desconhecido, a ausência total de informação.
+
+Por ser um valor "desconhecido", não podemos usar os operadores de comparação padrão (como `=` ou `<>`). Afinal, não faz sentido perguntar se "desconhecido é igual a desconhecido". Por isso, o SQL falhará se você tentar fazer `WHERE Coluna = NULL`.
+
+Para filtrar esses dados corretamente, utilizamos os operadores `IS NULL` e `IS NOT NULL`.
+
+**1. IS NULL (É Nulo)**
+
+Utilizamos este operador quando queremos encontrar registros onde a informação está faltando.
+
+**Sintaxe Básica:**
+
+```sql
+SELECT colunas FROM tabela
+WHERE coluna IS NULL;
+```
+
+**Exemplo Prático:**
+
+Lembra-se de quando adicionamos a coluna `Email` na tabela `Clientes` usando o `ALTER TABLE`? Todos os clientes antigos ficaram com esse campo vazio. Para listar quem precisa atualizar o cadastro:
+
+```sql
+SELECT Nome, Cidade FROM Clientes
+WHERE Email IS NULL;
+```
+
+_Este comando retorna todos os clientes que ainda não possuem um e-mail cadastrado no sistema._
+
+**2. IS NOT NULL (Não é Nulo)**
+
+Ao contrário do anterior, usamos o `IS NOT NULL` quando queremos filtrar apenas os registros que possuem a informação preenchida, ignorando os campos vazios.
+
+**Sintaxe Básica:**
+
+```sql
+SELECT colunas FROM tabela
+WHERE coluna IS NOT NULL;
+```
+
+**Exemplo Prático:**
+
+Se quisermos enviar uma promoção apenas para os clientes que já têm e-mail cadastrado (para evitar erros de envio):
+
+```sql
+SELECT * FROM Clientes
+WHERE Email IS NOT NULL;
+```
